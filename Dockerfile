@@ -1,5 +1,7 @@
 FROM webdevops/php-nginx:7.4-alpine
 
+ARG VERSION=v6.0
+
 WORKDIR /OLAINDEX
 
 COPY default.conf /opt/docker/etc/nginx/conf.d
