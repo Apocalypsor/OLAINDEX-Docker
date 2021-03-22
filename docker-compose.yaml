@@ -12,7 +12,6 @@ services:
       - ./storage:/OLAINDEX/storage
     restart: unless-stopped
 
-
   redis:
     image: redis:alpine
     container_name: olaindex-redis
