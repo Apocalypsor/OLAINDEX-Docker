@@ -21,6 +21,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REPO_TOKEN }}
+      - name: Get Version
+        run: |
+          VERSION=$(grep "ARG VERSION=" Dockerfile | sed "s/ARG VERSION=//")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
@@ -30,3 +34,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/apocalypsor/olaindex:latest
+            ghcr.io/apocalypsor/olaindex:${{ env.VERSION }}
