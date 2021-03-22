@@ -25,4 +25,4 @@ docker-compose up -d
 
 4. Set up reverse proxy
 
-> If you want to HTTPS, I’d recommend you to expose 443 port and set proxy URL as `https://127.0.0.1:5553`
+> If you want to HTTPS, I’d recommend you to expose 443 port and set proxy URL as `https://127.0.0.1:55443`
