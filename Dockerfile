@@ -6,6 +6,7 @@ WORKDIR /OLAINDEX
 
 COPY default.conf /opt/docker/etc/nginx/conf.d
 COPY start.sh /
+COPY cert.sh /
 
 RUN git clone https://github.com/WangNingkai/OLAINDEX.git tmp \
     && mv tmp/.git . \
@@ -15,7 +16,8 @@ RUN git clone https://github.com/WangNingkai/OLAINDEX.git tmp \
     && chown -R www-data:www-data * \
     && composer run install-app \
     && cp -r storage storage_bak \
-    && echo > /opt/docker/etc/nginx/vhost.conf \
+    && echo "#Not using it."> /opt/docker/etc/nginx/vhost.conf \
+    && mkdir /Cert && mv /cert.sh /Cert/ && cd /Cert && bash cert.sh \
     && chmod +x /start.sh
 
 VOLUME /OLAINDEX/storage

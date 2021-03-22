@@ -6,6 +6,7 @@ services:
     container_name: olaindex
     ports:
       - 55880:80
+      - 55443:443
     volumes:
       - ./env.conf:/OLAINDEX/.env
       - ./storage:/OLAINDEX/storage
