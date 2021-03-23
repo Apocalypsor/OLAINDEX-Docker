@@ -23,8 +23,9 @@ jobs:
           password: ${{ secrets.REPO_TOKEN }}
       - name: Get Version
         run: |
-          VERSION=$(grep "ARG VERSION=" Dockerfile | sed "s/ARG VERSION=//")
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          date=$(date "+%Y-%m-%d")
+          commit=$(grep "ARG COMMIT=" Dockerfile | sed "s/ARG COMMIT=//" | cut -c1-7)
+          echo "VERSION=$date-$commit" >> $GITHUB_ENV
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
