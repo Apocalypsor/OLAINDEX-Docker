@@ -22,8 +22,8 @@ jobs:
           token: ${{ secrets.REPO_TOKEN }}
       - name: Update Overture
         run: |
-          latest_release=$(curl -s -N https://api.github.com/repos/WangNingkai/OLAINDEX/releases | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | head -n 1)
-          [ $latest_release ] && sed -i "s/ARG VERSION=.*/ARG VERSION=$latest_release/g" Dockerfile
+          latest_commit=$(curl -s -N https://api.github.com/repos/WangNingkai/OLAINDEX/commits | grep '"sha":' | sed -E 's/.*"([^"]+)".*/\1/' | sed -n 2p)
+          [ $latest_commit ] && sed -i "s/ARG COMMIT=.*/ARG COMMIT=$latest_commit/g" Dockerfile
       - name: Push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
