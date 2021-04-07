@@ -15,6 +15,7 @@ RUN git clone https://github.com/WangNingkai/OLAINDEX.git tmp \
     && composer install -vvv \
     && chown -R www-data:www-data * \
     && composer run install-app \
+    && composer require predis/predis \
     && cp -r storage storage_bak \
     && cat /tmp/default.conf > /opt/docker/etc/nginx/vhost.conf \
     && mkdir /Cert && mv /tmp/cert.sh /Cert/ && cd /Cert && bash cert.sh \
