@@ -16,6 +16,8 @@ EOF
     yes
 EOF
 
+    php artisan config:cache
+
     supervisord
 
 else
