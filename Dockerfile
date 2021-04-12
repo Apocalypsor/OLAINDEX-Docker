@@ -6,7 +6,6 @@ WORKDIR /OLAINDEX
 
 COPY default.conf /tmp
 COPY start.sh /
-COPY cert.sh /tmp
 
 RUN git clone https://github.com/WangNingkai/OLAINDEX.git tmp \
     && mv tmp/.git . \
@@ -18,7 +17,8 @@ RUN git clone https://github.com/WangNingkai/OLAINDEX.git tmp \
     && composer require predis/predis \
     && cp -r storage storage_bak \
     && cat /tmp/default.conf > /opt/docker/etc/nginx/vhost.conf \
-    && mkdir /Cert && mv /tmp/cert.sh /Cert/ && cd /Cert && bash cert.sh \
+    && rm -f /tmp/default.conf \
+    && sed -i "s?\$proxies;?\$proxies=\'\*\*\';?" /OLAINDEX/app/Http/Middleware/TrustProxies.php \
     && chmod +x /start.sh
 
 VOLUME /OLAINDEX/storage
