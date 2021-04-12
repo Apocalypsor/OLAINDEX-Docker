@@ -21,6 +21,10 @@ mkdir storage && chmod -R 777 storage
 ```bash
 curl https://raw.githubusercontent.com/Apocalypsor/OLAINDEX-Docker/master/docker-compose.yaml > docker-compose.yaml
 docker-compose up -d
+
+# optional
+docker exec -it olaindex php artisan key:generate
+docker exec -it olaindex php artisan migrate --seed
 ```
 
 4. Set up reverse proxy

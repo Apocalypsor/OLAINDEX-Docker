@@ -8,15 +8,14 @@ if [ -f "/OLAINDEX/.env" ]; then
     rm -rf storage_bak/
     chmod -R 777 storage/
 
-    php artisan key:generate << EOF
-    yes
-EOF
-
-    php artisan migrate --seed << EOF
-    yes
-EOF
-
+    php artisan config:clear
     php artisan config:cache
+
+    php artisan route:clear
+    php artisan route:cache
+
+    php artisan clear-compiled
+    php artisan optimize
 
     supervisord
 
