@@ -17,7 +17,7 @@ if [ -f "/OLAINDEX/.env" ]; then
     php artisan clear-compiled
     php artisan optimize
 
-    supervisord
+    crond && supervisord
 
 else
     echo "Please add env first!"
