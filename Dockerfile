@@ -6,12 +6,14 @@ WORKDIR /OLAINDEX
 
 COPY default.conf /tmp
 COPY start.sh /
-COPY crons/* /opt/cronjobs
+COPY crons /OLAINDEX/crons
 
-RUN git clone https://github.com/WangNingkai/OLAINDEX.git -b $COMMIT tmp \
+RUN set -xe \
+    && rm -rf /var/lib/apt/lists/* \
+    && git clone https://github.com/WangNingkai/OLAINDEX.git tmp \
     && mv tmp/.git . \
     && rm -rf tmp \
-    && git reset --hard \
+    && git reset --hard $COMMIT \
     && composer install -vvv \
     && chown -R www-data:www-data * \
     && composer run install-app \
@@ -19,8 +21,8 @@ RUN git clone https://github.com/WangNingkai/OLAINDEX.git -b $COMMIT tmp \
     && cp -r storage storage_bak \
     && cat /tmp/default.conf > /opt/docker/etc/nginx/vhost.conf \
     && sed -i "s?\$proxies;?\$proxies=\'\*\*\';?" /OLAINDEX/app/Http/Middleware/TrustProxies.php \
-    && chmod +x /start.sh /opt/cronjobs/cache.sh \
-    && cat /opt/cronjobs/cronjobs >> /etc/crontabs/root 
+    && cat /OLAINDEX/crons/cronjobs >> /etc/crontabs/root \
+    && chmod +x /start.sh /OLAINDEX/crons/cache.sh
 
 VOLUME /OLAINDEX/storage
 

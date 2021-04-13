@@ -1,1 +1,1 @@
-*/15 * * * * /opt/cronjobs/cache.sh > /dev/null 2>&1
+*/10 * * * * /OLAINDEX/crons/cache.sh > /dev/null 2>&1
