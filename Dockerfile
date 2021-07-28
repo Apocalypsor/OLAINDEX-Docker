@@ -1,6 +1,6 @@
 FROM webdevops/php-nginx:7.4-alpine
 
-ARG COMMIT=b973d6bdb4f04cb03b77c4422f4c61cb4941073e
+ARG COMMIT=78939ad9e96a0034b40102b4f18aff2e5abdeb47
 
 WORKDIR /OLAINDEX
 
