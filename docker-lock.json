@@ -1,0 +1,27 @@
+{
+	"composefiles": {
+		"docker-compose.yaml": [
+			{
+				"name": "ghcr.io/apocalypsor/olaindex",
+				"tag": "latest",
+				"digest": "7a9063fdd96b6f76c9c93a82a1b99d3c466d9ceb8a36633cf66fce207c68914b",
+				"service": "olaindex"
+			},
+			{
+				"name": "redis",
+				"tag": "alpine",
+				"digest": "3ff6fbaa2896f825bbb93f0cf82716b6cdcd700ee066de4f9178c2028fe56c52",
+				"service": "redis"
+			}
+		]
+	},
+	"dockerfiles": {
+		"Dockerfile": [
+			{
+				"name": "webdevops/php-nginx",
+				"tag": "7.4-alpine",
+				"digest": "912b53f209f546ca69539bef23d374687a59d900530ffc0aa9b1eb1273f1e00f"
+			}
+		]
+	}
+}

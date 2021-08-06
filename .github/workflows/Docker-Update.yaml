@@ -7,7 +7,7 @@ on:
     branches:
       - master
     paths:
-      - .github/workflows/Update.yaml
+      - .github/workflows/Docker-Update.yaml
   
   schedule:
     - cron: 0 4 * * *
@@ -20,14 +20,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.REPO_TOKEN }}
-      - name: Update Overture
-        run: |
-          latest_commit=$(curl -s -N https://api.github.com/repos/WangNingkai/OLAINDEX/commits | grep '"sha":' | sed -E 's/.*"([^"]+)".*/\1/' | head -1)
-          [ $latest_commit ] && sed -i "s/ARG COMMIT=.*/ARG COMMIT=$latest_commit/g" Dockerfile
+          fetch-depth: 0
+          submodules: true
+      - name: Update Submodules
+        run: git submodule foreach 'git fetch origin; git checkout $(git rev-parse --abbrev-ref HEAD); git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); git submodule update --recursive; git clean -dfx'
       - name: Push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Update OLAINDEX
+          commit_message: Update Dockerfile
           skip_dirty_check: false
           commit_user_name: Action Bot
           commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com

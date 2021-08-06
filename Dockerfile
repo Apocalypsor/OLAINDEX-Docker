@@ -1,16 +1,14 @@
 FROM webdevops/php-nginx:7.4-alpine
 
-ARG COMMIT=78939ad9e96a0034b40102b4f18aff2e5abdeb47
-
 WORKDIR /OLAINDEX
 
+COPY OLAINDEX /OLAINDEX/tmp
 COPY default.conf /tmp
 COPY start.sh /
 COPY crons /OLAINDEX/crons
 
 RUN set -xe \
     && rm -rf /var/lib/apt/lists/* \
-    && git clone https://github.com/WangNingkai/OLAINDEX.git tmp \
     && mv tmp/.git . \
     && rm -rf tmp \
     && git reset --hard $COMMIT \
