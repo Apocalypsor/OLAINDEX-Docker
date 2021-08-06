@@ -11,13 +11,12 @@ RUN set -xe \
     && rm -rf /var/lib/apt/lists/* \
     && mv tmp/.git . \
     && rm -rf tmp \
-    && git reset --hard $COMMIT \
     && composer install -vvv \
     && chown -R www-data:www-data * \
     && composer run install-app \
     && composer require predis/predis \
     && cp -r storage storage_bak \
-    && cat /tmp/default.conf > /opt/docker/etc/nginx/vhost.conf \
+    && mv -f /tmp/default.conf /opt/docker/etc/nginx/vhost.conf \
     && sed -i "s?\$proxies;?\$proxies=\'\*\*\';?" /OLAINDEX/app/Http/Middleware/TrustProxies.php \
     && cat /OLAINDEX/crons/cronjobs >> /etc/crontabs/root \
     && chmod +x /start.sh /OLAINDEX/crons/cache.sh
