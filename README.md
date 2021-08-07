@@ -26,7 +26,3 @@ docker-compose up -d
 docker exec -it olaindex php artisan key:generate
 docker exec -it olaindex php artisan migrate --seed
 ```
-
-4. Set up reverse proxy
-
-> If you want to use HTTPS, I’d recommend you to expose 443 port and set proxy URL as `https://127.0.0.1:55443`
