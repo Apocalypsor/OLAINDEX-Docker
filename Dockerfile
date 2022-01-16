@@ -8,7 +8,6 @@ COPY start.sh /
 COPY crons /OLAINDEX/crons
 
 RUN set -xe \
-    && rm -rf /var/lib/apt/lists/* \
     && composer install -vvv \
     && chown -R www-data:www-data * \
     && composer run install-app \
